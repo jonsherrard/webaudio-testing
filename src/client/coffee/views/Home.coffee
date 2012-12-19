@@ -8,6 +8,7 @@ class APP.v.Home extends View
 		@screen_append()
 		@playing = false
 		@global_freq = 523
+		$('#freq').attr 'value', @global_freq
 		$('#mover').draggable(
 			containment : '#instrument'
 			drag : =>

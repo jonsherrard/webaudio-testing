@@ -194,6 +194,7 @@
       this.screen_append();
       this.playing = false;
       this.global_freq = 523;
+      $('#freq').attr('value', this.global_freq);
       return $('#mover').draggable({
         containment: '#instrument',
         drag: function() {
