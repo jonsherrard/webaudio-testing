@@ -190,7 +190,7 @@
       var context;
       console.log('play init');
       context = new webkitAudioContext();
-      this.oscillator = context.createOscillator;
+      this.oscillator = context.createOscillator();
       this.oscillator.type = 0;
       this.oscillator.frequency.value = 2000;
       this.oscillator.connect(context.destination);
