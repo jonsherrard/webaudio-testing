@@ -8,11 +8,11 @@ class APP.v.Home extends View
 	play : =>
 		console.log 'play init'
 		context = new webkitAudioContext()
-		oscillator = context.createOscillator()
-		oscillator.type = 0
-		oscillator.frequency.value = 2000
-		oscillator.connect context.destination
-		oscillator.noteOn and oscillator.noteOn(0)
+		@oscillator = context.create@oscillator()
+		@oscillator.type = 0
+		@oscillator.frequency.value = 2000
+		@oscillator.connect context.destination
+		@oscillator.noteOn and @oscillator.noteOn(0)
 	stop : =>
 		console.log 'top init'
-		oscillator.disconnect()
+		@oscillator.disconnect()
