@@ -168,6 +168,8 @@
     __extends(Home, _super);
 
     function Home() {
+      this.freq_update = __bind(this.freq_update, this);
+
       this.stop = __bind(this.stop, this);
 
       this.play = __bind(this.play, this);
@@ -178,7 +180,8 @@
 
     Home.prototype.events = {
       'click #play': 'play',
-      'click #stop': 'stop'
+      'click #stop': 'stop',
+      'keyup #freq': 'freq_update'
     };
 
     Home.prototype.initialize = function() {
@@ -193,7 +196,7 @@
         context = new webkitAudioContext();
         this.oscillator = context.createOscillator();
         this.oscillator.type = 0;
-        this.oscillator.frequency.value = 2000;
+        this.oscillator.frequency.value = 523.251;
         this.oscillator.connect(context.destination);
         this.oscillator.noteOn && this.oscillator.noteOn(0);
         return this.playing = true;
@@ -204,6 +207,8 @@
       this.playing = false;
       return this.oscillator.disconnect();
     };
+
+    Home.prototype.freq_update = function() {};
 
     return Home;
 

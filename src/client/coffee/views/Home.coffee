@@ -2,6 +2,7 @@ class APP.v.Home extends View
 	events :
 		'click #play' : 'play'
 		'click #stop' : 'stop'
+		'keyup #freq' : 'freq_update'
 	initialize : =>
 		@template = 'home.html'
 		@screen_append()
@@ -11,10 +12,11 @@ class APP.v.Home extends View
 			context = new webkitAudioContext()
 			@oscillator = context.createOscillator()
 			@oscillator.type = 0
-			@oscillator.frequency.value = 2000
+			@oscillator.frequency.value = 523.251
 			@oscillator.connect context.destination
 			@oscillator.noteOn and @oscillator.noteOn(0)
 			@playing = true
 	stop : =>
 		@playing = false
 		@oscillator.disconnect()
+	freq_update : =>
