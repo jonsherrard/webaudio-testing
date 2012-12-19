@@ -5,14 +5,16 @@ class APP.v.Home extends View
 	initialize : =>
 		@template = 'home.html'
 		@screen_append()
+		@playing = false
 	play : =>
-		console.log 'play init'
-		context = new webkitAudioContext()
-		@oscillator = context.createOscillator()
-		@oscillator.type = 0
-		@oscillator.frequency.value = 2000
-		@oscillator.connect context.destination
-		@oscillator.noteOn and @oscillator.noteOn(0)
+		unless @playing
+			context = new webkitAudioContext()
+			@oscillator = context.createOscillator()
+			@oscillator.type = 0
+			@oscillator.frequency.value = 2000
+			@oscillator.connect context.destination
+			@oscillator.noteOn and @oscillator.noteOn(0)
+			@playing = true
 	stop : =>
-		console.log 'top init'
+		@playing = false
 		@oscillator.disconnect()

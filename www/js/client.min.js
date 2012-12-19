@@ -183,22 +183,25 @@
 
     Home.prototype.initialize = function() {
       this.template = 'home.html';
-      return this.screen_append();
+      this.screen_append();
+      return this.playing = false;
     };
 
     Home.prototype.play = function() {
       var context;
-      console.log('play init');
-      context = new webkitAudioContext();
-      this.oscillator = context.createOscillator();
-      this.oscillator.type = 0;
-      this.oscillator.frequency.value = 2000;
-      this.oscillator.connect(context.destination);
-      return this.oscillator.noteOn && this.oscillator.noteOn(0);
+      if (!this.playing) {
+        context = new webkitAudioContext();
+        this.oscillator = context.createOscillator();
+        this.oscillator.type = 0;
+        this.oscillator.frequency.value = 2000;
+        this.oscillator.connect(context.destination);
+        this.oscillator.noteOn && this.oscillator.noteOn(0);
+        return this.playing = true;
+      }
     };
 
     Home.prototype.stop = function() {
-      console.log('top init');
+      this.playing = false;
       return this.oscillator.disconnect();
     };
 
