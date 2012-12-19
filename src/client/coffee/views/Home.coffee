@@ -3,6 +3,7 @@ class APP.v.Home extends View
 		'click #play' : 'play'
 		'click #stop' : 'stop'
 		'click #update' : 'freq_update'
+		'mousedown #mover' : 'drag'
 	initialize : =>
 		@template = 'home.html'
 		@screen_append()
@@ -21,3 +22,5 @@ class APP.v.Home extends View
 		@oscillator.disconnect()
 	freq_update : =>
 		@oscillator.frequency.value = $('#freq').attr 'value'
+	drag : =>
+		console.log $('#mover').offset()

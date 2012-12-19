@@ -168,6 +168,8 @@
     __extends(Home, _super);
 
     function Home() {
+      this.drag = __bind(this.drag, this);
+
       this.freq_update = __bind(this.freq_update, this);
 
       this.stop = __bind(this.stop, this);
@@ -181,7 +183,8 @@
     Home.prototype.events = {
       'click #play': 'play',
       'click #stop': 'stop',
-      'click #update': 'freq_update'
+      'click #update': 'freq_update',
+      'mousedown #mover': 'drag'
     };
 
     Home.prototype.initialize = function() {
@@ -210,6 +213,10 @@
 
     Home.prototype.freq_update = function() {
       return this.oscillator.frequency.value = $('#freq').attr('value');
+    };
+
+    Home.prototype.drag = function() {
+      return console.log($('#mover').offset());
     };
 
     return Home;
