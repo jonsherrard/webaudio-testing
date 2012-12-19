@@ -11,7 +11,7 @@ class APP.v.Home extends View
 		unless @playing
 			context = new webkitAudioContext()
 			@oscillator = context.createOscillator()
-			@oscillator.type = 0
+			@oscillator.type = 1
 			@oscillator.frequency.value = 523.251
 			@oscillator.connect context.destination
 			@oscillator.noteOn and @oscillator.noteOn(0)

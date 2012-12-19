@@ -195,7 +195,7 @@
       if (!this.playing) {
         context = new webkitAudioContext();
         this.oscillator = context.createOscillator();
-        this.oscillator.type = 0;
+        this.oscillator.type = 1;
         this.oscillator.frequency.value = 523.251;
         this.oscillator.connect(context.destination);
         this.oscillator.noteOn && this.oscillator.noteOn(0);
