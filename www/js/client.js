@@ -168,13 +168,38 @@
     __extends(Home, _super);
 
     function Home() {
+      this.stop = __bind(this.stop, this);
+
+      this.play = __bind(this.play, this);
+
       this.initialize = __bind(this.initialize, this);
       return Home.__super__.constructor.apply(this, arguments);
     }
 
+    Home.prototype.events = {
+      'click #play': 'play',
+      'click #stop': 'stop'
+    };
+
     Home.prototype.initialize = function() {
       this.template = 'home.html';
       return this.screen_append();
+    };
+
+    Home.prototype.play = function() {
+      var context, oscillator;
+      console.log('play init');
+      context = new webkitAudioContext();
+      oscillator = context.createOscillator();
+      oscillator.type = 0;
+      oscillator.frequency.value = 2000;
+      oscillator.connect(context.destination);
+      return oscillator.noteOn && oscillator.noteOn(0);
+    };
+
+    Home.prototype.stop = function() {
+      console.log('top init');
+      return oscillator.disconnect();
     };
 
     return Home;
