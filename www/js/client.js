@@ -246,7 +246,7 @@
 
     Home.prototype.calc = function(x, y) {
       var ratio;
-      y = 460.11 - y;
+      y = 350.11 - y;
       x = 367.5 - x;
       $('#mover').css({
         background: "rgb(" + (255 - y) + "," + y + "," + y + ")"

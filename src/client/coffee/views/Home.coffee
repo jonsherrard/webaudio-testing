@@ -42,7 +42,7 @@ class APP.v.Home extends View
 			@oscillator.frequency.value = @global_freq
 		$('#freq').attr('value', @global_freq)
 	calc : (x, y) =>
-		y = 460.11-y
+		y = 350.11-y
 		x = 367.5-x
 		$('#mover').css
 			background: "rgb("+(255-y)+","+y+","+y+")"
