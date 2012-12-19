@@ -251,7 +251,7 @@
       $('#mover').css({
         background: "rgb(0,0," + y + ")"
       });
-      ratio = 4;
+      ratio = 2.16;
       this.freq_update((y * ratio) + 60);
       return $('h1#freq_text').html(this.global_freq);
     };

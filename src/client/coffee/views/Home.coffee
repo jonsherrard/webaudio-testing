@@ -47,7 +47,7 @@ class APP.v.Home extends View
 		x = 367.5-x
 		$('#mover').css
 			background: "rgb(0,0,"+y+")"
-		ratio = 4
+		ratio = 2.16
 		@freq_update((y*ratio)+60)
 		$('h1#freq_text').html @global_freq
 
