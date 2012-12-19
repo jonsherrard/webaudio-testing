@@ -2,7 +2,7 @@ class APP.v.Home extends View
 	events :
 		'click #play' : 'play'
 		'click #stop' : 'stop'
-		'click #update' : 'freq_update'
+		'click #update' : 'input_update'
 	initialize : =>
 		@template = 'home.html'
 		@screen_append()
@@ -10,9 +10,9 @@ class APP.v.Home extends View
 		@global_freq = 523
 		$('#mover').draggable(
 			containment : '#instrument'
-			drag : ->
-				offset = $(@).offset()
-				console.log offset
+			drag : =>
+				offset = $('#mover').offset()
+				@calc(offset.left, offset.top)
 		)
 		
 	play : =>
@@ -27,10 +27,18 @@ class APP.v.Home extends View
 	stop : =>
 		@playing = false
 		@oscillator.disconnect()
-	freq_update : =>
-		@global_freq = $('#freq').attr 'value'
+	input_update : =>
+		form_value = $('#freq').attr 'value'
+		@freq_update(form_value)
+	
+	freq_update : (freq)=>
+		@global_freq = freq
 		if @oscillator?
 			@oscillator.frequency.value = @global_freq
-	drag : =>
-		console.log $('#mover').offset()
-		
+		$('#freq').attr('value', @global_freq)
+	calc : (x, y) =>
+		y = 556-y
+		x = 367.5-x
+		ratio = 4
+		@freq_update((y*ratio)+60)
+

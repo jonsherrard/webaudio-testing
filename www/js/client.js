@@ -163,6 +163,91 @@
 
   })(View);
 
+  APP.v.Home = (function(_super) {
+
+    __extends(Home, _super);
+
+    function Home() {
+      this.calc = __bind(this.calc, this);
+
+      this.freq_update = __bind(this.freq_update, this);
+
+      this.input_update = __bind(this.input_update, this);
+
+      this.stop = __bind(this.stop, this);
+
+      this.play = __bind(this.play, this);
+
+      this.initialize = __bind(this.initialize, this);
+      return Home.__super__.constructor.apply(this, arguments);
+    }
+
+    Home.prototype.events = {
+      'click #play': 'play',
+      'click #stop': 'stop',
+      'click #update': 'input_update'
+    };
+
+    Home.prototype.initialize = function() {
+      var _this = this;
+      this.template = 'home.html';
+      this.screen_append();
+      this.playing = false;
+      this.global_freq = 523;
+      return $('#mover').draggable({
+        containment: '#instrument',
+        drag: function() {
+          var offset;
+          offset = $('#mover').offset();
+          return _this.calc(offset.left, offset.top);
+        }
+      });
+    };
+
+    Home.prototype.play = function() {
+      var context;
+      if (!this.playing) {
+        context = new webkitAudioContext();
+        this.oscillator = context.createOscillator();
+        this.oscillator.type = 1;
+        this.oscillator.frequency.value = this.global_freq;
+        this.oscillator.connect(context.destination);
+        this.oscillator.noteOn && this.oscillator.noteOn(0);
+        return this.playing = true;
+      }
+    };
+
+    Home.prototype.stop = function() {
+      this.playing = false;
+      return this.oscillator.disconnect();
+    };
+
+    Home.prototype.input_update = function() {
+      var form_value;
+      form_value = $('#freq').attr('value');
+      return this.freq_update(form_value);
+    };
+
+    Home.prototype.freq_update = function(freq) {
+      this.global_freq = freq;
+      if (this.oscillator != null) {
+        this.oscillator.frequency.value = this.global_freq;
+      }
+      return $('#freq').attr('value', this.global_freq);
+    };
+
+    Home.prototype.calc = function(x, y) {
+      var ratio;
+      y = 556 - y;
+      x = 367.5 - x;
+      ratio = 4;
+      return this.freq_update((y * ratio) + 60);
+    };
+
+    return Home;
+
+  })(View);
+
   APP.v.InnerApp = (function(_super) {
 
     __extends(InnerApp, _super);
@@ -189,77 +274,6 @@
     };
 
     return InnerApp;
-
-  })(View);
-
-  APP.v.Home = (function(_super) {
-
-    __extends(Home, _super);
-
-    function Home() {
-      this.drag = __bind(this.drag, this);
-
-      this.freq_update = __bind(this.freq_update, this);
-
-      this.stop = __bind(this.stop, this);
-
-      this.play = __bind(this.play, this);
-
-      this.initialize = __bind(this.initialize, this);
-      return Home.__super__.constructor.apply(this, arguments);
-    }
-
-    Home.prototype.events = {
-      'click #play': 'play',
-      'click #stop': 'stop',
-      'click #update': 'freq_update'
-    };
-
-    Home.prototype.initialize = function() {
-      this.template = 'home.html';
-      this.screen_append();
-      this.playing = false;
-      this.global_freq = 523;
-      return $('#mover').draggable({
-        containment: '#instrument',
-        drag: function() {
-          var offset;
-          offset = $(this).offset();
-          return console.log(offset);
-        }
-      });
-    };
-
-    Home.prototype.play = function() {
-      var context;
-      if (!this.playing) {
-        context = new webkitAudioContext();
-        this.oscillator = context.createOscillator();
-        this.oscillator.type = 1;
-        this.oscillator.frequency.value = this.global_freq;
-        this.oscillator.connect(context.destination);
-        this.oscillator.noteOn && this.oscillator.noteOn(0);
-        return this.playing = true;
-      }
-    };
-
-    Home.prototype.stop = function() {
-      this.playing = false;
-      return this.oscillator.disconnect();
-    };
-
-    Home.prototype.freq_update = function() {
-      this.global_freq = $('#freq').attr('value');
-      if (this.oscillator != null) {
-        return this.oscillator.frequency.value = this.global_freq;
-      }
-    };
-
-    Home.prototype.drag = function() {
-      return console.log($('#mover').offset());
-    };
-
-    return Home;
 
   })(View);
 
