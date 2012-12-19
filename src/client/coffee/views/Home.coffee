@@ -49,6 +49,6 @@ class APP.v.Home extends View
 			background: "rgb(0,0,"+y+")"
 		ratio = 2.16
 		@freq_update((y*ratio)+60)
-		$('h1#freq_text').html @global_freq.substr(3)
+		$('h1#freq_text').html @global_freq
 
 

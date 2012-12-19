@@ -253,7 +253,7 @@
       });
       ratio = 2.16;
       this.freq_update((y * ratio) + 60);
-      return $('h1#freq_text').html(this.global_freq.substr(3));
+      return $('h1#freq_text').html(this.global_freq);
     };
 
     return Home;
