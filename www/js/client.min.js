@@ -187,19 +187,19 @@
     };
 
     Home.prototype.play = function() {
-      var context, oscillator;
+      var context;
       console.log('play init');
       context = new webkitAudioContext();
-      oscillator = context.createOscillator();
-      oscillator.type = 0;
-      oscillator.frequency.value = 2000;
-      oscillator.connect(context.destination);
-      return oscillator.noteOn && oscillator.noteOn(0);
+      this.oscillator = context.createOscillator;
+      this.oscillator.type = 0;
+      this.oscillator.frequency.value = 2000;
+      this.oscillator.connect(context.destination);
+      return this.oscillator.noteOn && this.oscillator.noteOn(0);
     };
 
     Home.prototype.stop = function() {
       console.log('top init');
-      return oscillator.disconnect();
+      return this.oscillator.disconnect();
     };
 
     return Home;
