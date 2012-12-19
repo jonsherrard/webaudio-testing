@@ -5,5 +5,5 @@ templates['home.html'] = template(function (Handlebars,depth0,helpers,partials,d
   
 
 
-  return "<h1>Hello, world</h1>";});
+  return "<div class=\"container\"><div class=\"row\"><div class=\"span12\"><div class=\"hero-unit\"><h1>Web Audio Oscillator</h1></div></div></div></div>";});
 })();
