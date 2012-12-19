@@ -163,66 +163,6 @@
 
   })(View);
 
-  APP.v.Home = (function(_super) {
-
-    __extends(Home, _super);
-
-    function Home() {
-      this.drag = __bind(this.drag, this);
-
-      this.freq_update = __bind(this.freq_update, this);
-
-      this.stop = __bind(this.stop, this);
-
-      this.play = __bind(this.play, this);
-
-      this.initialize = __bind(this.initialize, this);
-      return Home.__super__.constructor.apply(this, arguments);
-    }
-
-    Home.prototype.events = {
-      'click #play': 'play',
-      'click #stop': 'stop',
-      'click #update': 'freq_update',
-      'mousedown #mover': 'drag'
-    };
-
-    Home.prototype.initialize = function() {
-      this.template = 'home.html';
-      this.screen_append();
-      return this.playing = false;
-    };
-
-    Home.prototype.play = function() {
-      var context;
-      if (!this.playing) {
-        context = new webkitAudioContext();
-        this.oscillator = context.createOscillator();
-        this.oscillator.type = 1;
-        this.oscillator.frequency.value = 523.251;
-        this.oscillator.connect(context.destination);
-        this.oscillator.noteOn && this.oscillator.noteOn(0);
-        return this.playing = true;
-      }
-    };
-
-    Home.prototype.stop = function() {
-      this.playing = false;
-      return this.oscillator.disconnect();
-    };
-
-    Home.prototype.freq_update = function() {
-      return this.oscillator.frequency.value = $('#freq').attr('value');
-    };
-
-    Home.prototype.drag = function() {
-      return console.log($('#mover').offset());
-    };
-
-    return Home;
-
-  })(View);
-
   APP.v.InnerApp = (function(_super) {
 
     __extends(InnerApp, _super);
@@ -249,6 +189,77 @@
     };
 
     return InnerApp;
+
+  })(View);
+
+  APP.v.Home = (function(_super) {
+
+    __extends(Home, _super);
+
+    function Home() {
+      this.drag = __bind(this.drag, this);
+
+      this.freq_update = __bind(this.freq_update, this);
+
+      this.stop = __bind(this.stop, this);
+
+      this.play = __bind(this.play, this);
+
+      this.initialize = __bind(this.initialize, this);
+      return Home.__super__.constructor.apply(this, arguments);
+    }
+
+    Home.prototype.events = {
+      'click #play': 'play',
+      'click #stop': 'stop',
+      'click #update': 'freq_update'
+    };
+
+    Home.prototype.initialize = function() {
+      this.template = 'home.html';
+      this.screen_append();
+      this.playing = false;
+      this.global_freq = 523;
+      return $('#mover').draggable({
+        containment: '#instrument',
+        drag: function() {
+          var offset;
+          offset = $(this).offset();
+          return console.log(offset);
+        }
+      });
+    };
+
+    Home.prototype.play = function() {
+      var context;
+      if (!this.playing) {
+        context = new webkitAudioContext();
+        this.oscillator = context.createOscillator();
+        this.oscillator.type = 1;
+        this.oscillator.frequency.value = this.global_freq;
+        this.oscillator.connect(context.destination);
+        this.oscillator.noteOn && this.oscillator.noteOn(0);
+        return this.playing = true;
+      }
+    };
+
+    Home.prototype.stop = function() {
+      this.playing = false;
+      return this.oscillator.disconnect();
+    };
+
+    Home.prototype.freq_update = function() {
+      this.global_freq = $('#freq').attr('value');
+      if (this.oscillator != null) {
+        return this.oscillator.frequency.value = this.global_freq;
+      }
+    };
+
+    Home.prototype.drag = function() {
+      return console.log($('#mover').offset());
+    };
+
+    return Home;
 
   })(View);
 

@@ -3,17 +3,24 @@ class APP.v.Home extends View
 		'click #play' : 'play'
 		'click #stop' : 'stop'
 		'click #update' : 'freq_update'
-		'mousedown #mover' : 'drag'
 	initialize : =>
 		@template = 'home.html'
 		@screen_append()
 		@playing = false
+		@global_freq = 523
+		$('#mover').draggable(
+			containment : '#instrument'
+			drag : ->
+				offset = $(@).offset()
+				console.log offset
+		)
+		
 	play : =>
 		unless @playing
 			context = new webkitAudioContext()
 			@oscillator = context.createOscillator()
 			@oscillator.type = 1
-			@oscillator.frequency.value = 523.251
+			@oscillator.frequency.value = @global_freq
 			@oscillator.connect context.destination
 			@oscillator.noteOn and @oscillator.noteOn(0)
 			@playing = true
@@ -21,6 +28,9 @@ class APP.v.Home extends View
 		@playing = false
 		@oscillator.disconnect()
 	freq_update : =>
-		@oscillator.frequency.value = $('#freq').attr 'value'
+		@global_freq = $('#freq').attr 'value'
+		if @oscillator?
+			@oscillator.frequency.value = @global_freq
 	drag : =>
 		console.log $('#mover').offset()
+		
