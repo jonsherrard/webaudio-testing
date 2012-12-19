@@ -1,4 +1,4 @@
-static-site
+Web Audio
 ===========
 
-Static Site Generator using Cake, Coffeescript, Stylus and Jade. All views are handled with handlebars templates.
+Having a play with webAudio

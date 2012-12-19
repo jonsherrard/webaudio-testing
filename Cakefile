@@ -1,4 +1,4 @@
-remote = 'ec2:/srv/www/cloud.chaffin.ch/chaf'
+remote = 'webfaction:webapps/new_jon/webaudio/'
 
 fs 					= require 'fs'
 {parser, uglify} 	= require 'uglify-js'
