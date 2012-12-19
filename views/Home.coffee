@@ -6,6 +6,7 @@ class APP.v.Home extends View
 		@template = 'home.html'
 		@screen_append()
 	play : =>
+		console.log 'play init'
 		context = new webkitAudioContext()
 		oscillator = context.createOscillator()
 		oscillator.type = 0
@@ -13,4 +14,5 @@ class APP.v.Home extends View
 		oscillator.connect context.destination
 		oscillator.noteOn and oscillator.noteOn(0)
 	stop : =>
-		oscillator.disconnect();
+		console.log 'top init'
+		oscillator.disconnect()
