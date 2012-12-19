@@ -2,7 +2,7 @@ class APP.v.Home extends View
 	events :
 		'click #play' : 'play'
 		'click #stop' : 'stop'
-		'keyup #freq' : 'freq_update'
+		'click #update' : 'freq_update'
 	initialize : =>
 		@template = 'home.html'
 		@screen_append()
@@ -20,3 +20,4 @@ class APP.v.Home extends View
 		@playing = false
 		@oscillator.disconnect()
 	freq_update : =>
+		@oscillator.frequency.value = $('#freq').value()

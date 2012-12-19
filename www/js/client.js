@@ -181,7 +181,7 @@
     Home.prototype.events = {
       'click #play': 'play',
       'click #stop': 'stop',
-      'keyup #freq': 'freq_update'
+      'click #update': 'freq_update'
     };
 
     Home.prototype.initialize = function() {
@@ -208,7 +208,9 @@
       return this.oscillator.disconnect();
     };
 
-    Home.prototype.freq_update = function() {};
+    Home.prototype.freq_update = function() {
+      return this.oscillator.frequency.value = $('#freq').value();
+    };
 
     return Home;
 
