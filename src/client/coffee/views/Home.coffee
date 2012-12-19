@@ -7,10 +7,15 @@ class APP.v.Home extends View
 		@template = 'home.html'
 		@screen_append()
 		@playing = false
-		@global_freq = 523
+		@global_freq = 100
 		$('#freq').attr 'value', @global_freq
+		$('h1#freq_text').html @global_freq
 		$('#mover').draggable(
 			containment : '#instrument'
+			start : =>
+				@play()
+			stop : =>
+				@stop()
 			drag : =>
 				offset = $('#mover').offset()
 				@calc(offset.left, offset.top)
@@ -40,6 +45,10 @@ class APP.v.Home extends View
 	calc : (x, y) =>
 		y = 556-y
 		x = 367.5-x
+		$('#mover').css
+			background: "rgb(0,0,"+y+")"
 		ratio = 4
 		@freq_update((y*ratio)+60)
+		$('h1#freq_text').html @global_freq
+
 

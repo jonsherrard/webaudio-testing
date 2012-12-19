@@ -4,18 +4,8 @@
             .hero-unit
                 h1 Web Audio Oscillator
     .row
-        #controls
-            .span1.offset2
-                button.btn.btn-success#play Play
-            .span1.offset1
-                button.btn.btn-danger#stop Stop
-    .row
-        #notes
-            .span4.offset2
-                label(for='freq') Frequency
-                input#freq(placeholder='2000', name='freq', type="text")
-            .span1.offset1
-                button.btn#update Update
+        .span12
+            h1#freq_text 0
     .row
         .span12
             #instrument

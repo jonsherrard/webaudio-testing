@@ -193,10 +193,17 @@
       this.template = 'home.html';
       this.screen_append();
       this.playing = false;
-      this.global_freq = 523;
+      this.global_freq = 100;
       $('#freq').attr('value', this.global_freq);
+      $('h1#freq_text').html(this.global_freq);
       return $('#mover').draggable({
         containment: '#instrument',
+        start: function() {
+          return _this.play();
+        },
+        stop: function() {
+          return _this.stop();
+        },
         drag: function() {
           var offset;
           offset = $('#mover').offset();
@@ -241,8 +248,12 @@
       var ratio;
       y = 556 - y;
       x = 367.5 - x;
+      $('#mover').css({
+        background: "rgb(0,0," + y + ")"
+      });
       ratio = 4;
-      return this.freq_update((y * ratio) + 60);
+      this.freq_update((y * ratio) + 60);
+      return $('h1#freq_text').html(this.global_freq);
     };
 
     return Home;
