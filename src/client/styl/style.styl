@@ -1,13 +1,14 @@
 /*! cleancssfix */
-.hero-unit h1, h1#freq_text
+h1, h1#freq_text
 	text-align center
 	
 #instrument
-	width 300px
+	width 50px
 	height 300px
 	margin auto
 	background #eaeaea
 	position relative
+	border-radius 50px
 
 #mover
 	height 50px
@@ -16,5 +17,16 @@
 	background rgb(10,10,10)
 	position relative
 	top 40%
-	left 125px
 	cursor pointer
+	z-index 999999
+
+#waves
+	height 100%
+	width 100%
+	position absolute
+	top 0
+	z-index -99
+.wave
+	float left
+	width 33%
+	height 100%

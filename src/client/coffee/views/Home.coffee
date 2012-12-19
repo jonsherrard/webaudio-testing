@@ -20,7 +20,6 @@ class APP.v.Home extends View
 				offset = $('#mover').offset()
 				@calc(offset.left, offset.top)
 		)
-		
 	play : =>
 		unless @playing
 			context = new webkitAudioContext()
@@ -43,10 +42,10 @@ class APP.v.Home extends View
 			@oscillator.frequency.value = @global_freq
 		$('#freq').attr('value', @global_freq)
 	calc : (x, y) =>
-		y = 556-y
+		y = 460.11-y
 		x = 367.5-x
 		$('#mover').css
-			background: "rgb(0,0,"+y+")"
+			background: "rgb("+(255-y)+","+y+","+y+")"
 		ratio = 2.16
 		@freq_update((y*ratio)+60)
 		$('h1#freq_text').html @global_freq.toFixed(2)
