@@ -20,4 +20,4 @@ class APP.v.Home extends View
 		@playing = false
 		@oscillator.disconnect()
 	freq_update : =>
-		@oscillator.frequency.value = $('#freq').value()
+		@oscillator.frequency.value = $('#freq').attr 'value'

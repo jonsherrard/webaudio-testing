@@ -209,7 +209,7 @@
     };
 
     Home.prototype.freq_update = function() {
-      return this.oscillator.frequency.value = $('#freq').value();
+      return this.oscillator.frequency.value = $('#freq').attr('value');
     };
 
     return Home;
